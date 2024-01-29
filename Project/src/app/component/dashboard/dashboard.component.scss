@@ -1,0 +1,53 @@
+
+// Variables
+$primary-color: #007bff;
+$success-color: #28a745;
+$danger-color: #dc3545;
+$gray-color: #6c757d;
+
+// Reusable styles for card component
+.card {
+  margin-top: 20px;
+  border: 1px solid $gray-color;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-body {
+    padding: 20px;
+
+    h4 {
+      color: $primary-color;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 5px;
+    }
+
+    .launch-status {
+      color: $success-color;
+    }
+
+    img {
+      max-height: 150px;
+      width: 100%;
+      margin-top: 15px;
+      border-radius: 4px;
+    }
+  }
+}
+
+// Customize specific elements as needed
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
