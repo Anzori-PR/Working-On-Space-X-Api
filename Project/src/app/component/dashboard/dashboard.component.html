@@ -1,18 +1,22 @@
-<div class="container">
-    <div class="card" *ngFor="let data of Data">
-        <div class="card-body">
-            <h4 class="card-title">{{ data.mission_name }}</h4>
-            <p class="card-text"><strong>Launch Date:</strong> {{ data.launch_date_local | date : 'dd/MM/yyyy' }}</p>
-            <p class="card-text"><strong>Rocket Name:</strong> {{ data.rocket?.rocket_name || 'N/A' }}</p>
-            <p class="card-text"><strong>Rocket Type:</strong> {{ data.rocket?.rocket_type || 'N/A' }}</p>
-            <p class="card-text"><strong>Manufacturer:</strong> {{ data.rocket?.second_stage?.payloads[0]?.manufacturer || 'N/A' }}</p>
-            <p class="card-text"><strong>Customers:</strong> {{ data.rocket?.second_stage?.payloads[0]?.customers?.join(', ') || 'N/A' }}</p>
-            <p class="card-text"><strong>Nationality:</strong> {{ data.rocket?.second_stage?.payloads[0]?.nationality || 'N/A' }}</p>
-            <p class="card-text"><strong>Launch Site:</strong> {{ data.launch_site?.site_name_long || 'N/A' }}</p>
-            <p class="card-text"><strong>Launch Success:</strong> <span class="launch-status">{{ data.launch_success ? 'Yes' : 'No' }}</span></p>
-            <p class="card-text"><strong>Launch Failure Reason:</strong> {{ data.launch_failure_details?.reason || 'N/A' }}</p>
-            <p class="card-text"><strong>Article Link:</strong> <a href="{{ data.links?.article_link }}" target="_blank">{{ data.links?.article_link || 'N/A' }}</a></p>
-            <img src="{{ data.links?.mission_patch || 'placeholder-image-url' }}" alt="Mission Patch" class="img-fluid mt-3">
+<body>
+    <header [style.minWidth.px]="close">
+        <button (click)="sideMenu()"><fa-icon [icon]="faRocket"></fa-icon></button>
+        <nav>
+            <div>
+                <fa-icon [icon]="faCompass"></fa-icon>
+                <span *ngIf="menu">Dashboard</span>
+            </div>
+            <div>
+                <fa-icon [icon]="faBookmark"></fa-icon>
+                <span *ngIf="menu">Bookmarks</span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="search">
+            <fa-icon [icon]="faSearch"></fa-icon>
+            <input type="text" placeholder="Search For Rocket Launches">
         </div>
-    </div>
-</div>
+    </main>
+</body>
