@@ -22,16 +22,23 @@
 
         <div class="container">
             <div *ngFor="let data of Data" class="box">
-                <img class="mission-image" [src]="data.mission_patch" alt="Mission Patch">
+                <button> <fa-icon [icon]="faBookmark"></fa-icon> </button>
+                <img class="mission-image" [src]="data?.links.mission_patch" alt="Mission Patch"
+                    (error)="handleImageError($event)">
                 <div class="mission-details">
                     <h3>{{ data.mission_name }}</h3>
-                    <p class="launch-date">{{ data.launch_date_local | date: 'medium' }}</p>
-                    <p class="rocket-name">{{ data.rocket_name }}</p>
-                    <p class="site-name">{{ data.site_name_long }}</p>
-                    <p class="nationality">{{ data.nationality }}</p>
-                    <div class="launch-status" [class.success]="data.launch_success"
-                        [class.failure]="!data.launch_success">
-                        {{ data.launch_success ? 'Successful' : 'Failed' }}
+                    <p class="launch-date"><span>Launch Date: </span>{{ data.launch_date_local | date: 'dd/MM/yyyy' }}
+                    </p>
+                    <p class="rocket-name"><span>Rocket Name: </span>{{ data?.rocket.rocket_name }}</p>
+                    <p class="site-name"><span>Site Name: </span>{{ data?.launch_site.site_name_long.length > 20 ?
+                        data?.launch_site.site_name_long.substr(0, 20) + '...' : data?.launch_site.site_name_long }}</p>
+                    <span class="launch-status">
+                        Rocket Launch: 
+                        <p [class.success]="data.launch_success" [class.failure]="!data.launch_success"> {{
+                            data.launch_success ? 'Successful' : 'Failed' }} </p>
+                    </span>
+                    <div class="details">
+                        Details
                     </div>
                 </div>
             </div>

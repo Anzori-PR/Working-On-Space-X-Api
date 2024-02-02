@@ -1,171 +1,196 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
 body {
   width: 100%;
   height: 100vh;
   background-color: #10141e;
   display: flex;
+}
 
+header {
+  min-width: 40px;
+  height: 100vh;
+  padding: 20px;
+  padding-top: 50px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #161d2f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  transition: min-width 0.5s ease-in-out;
 
-  header {
-    min-width: 40px;
-    height: 100vh;
-    padding: 20px;
-    padding-top: 50px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background-color: #161d2f;
+  button {
+    position: absolute;
+    left: 20px;
+    background-color: transparent;
+    padding: 5px 7px;
+    color: #fc4747;
+    cursor: pointer;
+    font-size: 20px;
+    border: 2px solid #fc4747;
+    border-radius: 5px;
+  }
+
+  nav {
+    width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    color: white;
+    margin-top: 5rem;
+
+    div {
+      margin: 30px 10px;
+      display: flex;
+      gap: 1rem;
+      height: 20px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    div:hover {
+      color: #fc4747;
+    }
+  }
+}
+
+main {
+  width: 100%;
+  padding: 20px;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  overflow-y: scroll;
+
+  form {
+    width: 100%;
+    display: flex;
     align-items: center;
     gap: 2rem;
-    transition: min-width 0.5s ease-in-out;
 
-
-    button {
-      position: absolute;
-      left: 20px;
-      background-color: transparent;
-      padding: 5px 7px;
-      color: #fc4747;
-      cursor: pointer;
-      font-size: 20px;
-      border: 2px solid #fc4747;
-      border-radius: 5px;
+    fa-icon {
+      font-size: 25px;
+      color: white;
     }
 
-    nav {
+    input {
       width: 100%;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      padding-bottom: 5px;
+      color: gray;
+      font-size: 25px;
+    }
+
+    input:focus {
+      border-bottom: 1px solid white;
+    }
+  }
+
+  .container {
+    width: 100%;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    color: white;
+
+    .box {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      color: white;
-      margin-top: 5rem;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+      max-width: 280px;
 
-      div {
-        margin: 30px 10px;
-        display: flex;
-        gap: 1rem;
-        height: 20px;
-        font-size: 20px;
-        cursor: pointer;
+      &:hover {
+        transform: scale(1.05);
       }
 
-      div:hover {
-        color: #fc4747
-      }
-      
-    }
-  }
-
-  main {
-    width: 100%;
-    padding: 20px;
-    padding-top: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    overflow-y: scroll;
-
-
-    form {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-
-      fa-icon {
-        font-size: 25px;
-        color: white;
-      }
-
-      input {
-        width: 100%;
-        border: none;
-        outline: none;
+      button {
         background-color: transparent;
-        padding-bottom: 5px;
-        color: gray;
-        font-size: 25px;
-      }
-
-      input:focus {
-        border-bottom: 1px solid white;
-      }
-    }
-
-
-    .container {
-      width: 100%;
-      display: grid;
-      grid-gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      color: white;
-
-      .box {
+        border: none;
+        color: white;
         display: flex;
-        flex-direction: column;
-        border: 1px solid #ddd;
-        padding: 15px;
-        margin: 10px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out;
-      
-        &:hover {
-          transform: scale(1.05);
+        justify-content: end;
+        font-size: 20px;
+
+        fa-icon {
+          cursor: pointer;
         }
       }
-      
-      .mission-image {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        margin-bottom: 10px;
-      }
-      
-      .mission-details {
-        flex: 1;
-      }
-      
-      .launch-date {
-        font-size: 14px;
-        color: #777;
-        margin-bottom: 5px;
-      }
-      
-      .rocket-name {
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-      
-      .site-name {
+
+      span {
+        font-size: 13px;
         color: #555;
-        margin-bottom: 5px;
+        font-weight: 300;
       }
-      
-      .nationality {
-        color: #777;
-        margin-bottom: 10px;
-      }
-      
-      .launch-status {
-        font-weight: bold;
-        padding: 8px;
-        border-radius: 4px;
-        color: #fff;
-        text-align: center;
-      }
-      
-      .success {
-        background-color: #4caf50;
-      }
-      
-      .failure {
-        background-color: #f44336;
-      }
-      
     }
   }
 
+  .mission-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
 
+  .mission-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+  }
+
+  .launch-date {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 5px;
+  }
+
+  .rocket-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #777;
+  }
+
+  .site-name {
+    color: #777;
+    margin-bottom: 5px;
+  }
+
+  .launch-status {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .details {
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 4px;
+    color: #fff;
+    text-align: center;
+    background-color: #f44336;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .success {
+    color: #4caf50;
+  }
+
+  .failure {
+    color: #f44336;
+  }
 }

@@ -37,6 +37,7 @@ export class DashboardComponent implements OnInit{
   faBookmark = faBookmark;
   faSearch = faSearch;
   searchForm!: FormGroup;
+  defaultImage: string = '../../../assets/default.jpg';
 
   constructor(private service : FetchDataService) {}
 
@@ -79,6 +80,10 @@ export class DashboardComponent implements OnInit{
         item.mission_name.toLowerCase().includes(searchTerm)
       );
     }
+  }
+
+  handleImageError(event: any) {
+    event.target.src = this.defaultImage;
   }
   
 
