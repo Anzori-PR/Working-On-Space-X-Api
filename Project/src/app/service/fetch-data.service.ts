@@ -17,4 +17,8 @@ export class FetchDataService {
   getData() : Observable<rocket_launches[]>{
     return this.http.get<rocket_launches[]>(this.Api_url);
   }
+
+  getSearch(rocket: string) : Observable<any>{
+    return this.http.get(`${this.Api_url}/search?q=${rocket}`);
+  }
 }

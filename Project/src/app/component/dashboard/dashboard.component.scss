@@ -6,6 +6,7 @@ body {
 
 
   header {
+    min-width: 40px;
     height: 100vh;
     padding: 20px;
     padding-top: 50px;
@@ -16,7 +17,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    transition: margin-left 0.3s ease-in-out;
+    transition: min-width 0.5s ease-in-out;
 
 
     button {
@@ -36,8 +37,7 @@ body {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: start;
-      gap: 1rem;
+      align-items: flex-start;
       color: white;
       margin-top: 5rem;
 
@@ -53,6 +53,7 @@ body {
       div:hover {
         color: #fc4747
       }
+      
     }
   }
 
@@ -60,11 +61,13 @@ body {
     width: 100%;
     padding: 20px;
     padding-top: 50px;
-    height: 100vh;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    overflow-y: scroll;
 
 
-    .search {
+    form {
       width: 100%;
       display: flex;
       align-items: center;
@@ -88,6 +91,79 @@ body {
       input:focus {
         border-bottom: 1px solid white;
       }
+    }
+
+
+    .container {
+      width: 100%;
+      display: grid;
+      grid-gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      color: white;
+
+      .box {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+      
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+      
+      .mission-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+      
+      .mission-details {
+        flex: 1;
+      }
+      
+      .launch-date {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 5px;
+      }
+      
+      .rocket-name {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      
+      .site-name {
+        color: #555;
+        margin-bottom: 5px;
+      }
+      
+      .nationality {
+        color: #777;
+        margin-bottom: 10px;
+      }
+      
+      .launch-status {
+        font-weight: bold;
+        padding: 8px;
+        border-radius: 4px;
+        color: #fff;
+        text-align: center;
+      }
+      
+      .success {
+        background-color: #4caf50;
+      }
+      
+      .failure {
+        background-color: #f44336;
+      }
+      
     }
   }
 

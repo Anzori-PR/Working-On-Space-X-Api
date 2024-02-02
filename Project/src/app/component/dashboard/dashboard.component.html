@@ -14,9 +14,27 @@
     </header>
 
     <main>
-        <div class="search">
+        <form [formGroup]="searchForm" (ngSubmit)="search()">
             <fa-icon [icon]="faSearch"></fa-icon>
-            <input type="text" placeholder="Search For Rocket Launches">
+            <input type="text" formControlName="search" placeholder="Search..." (keydown.enter)="search()" />
+        </form>
+
+
+        <div class="container">
+            <div *ngFor="let data of Data" class="box">
+                <img class="mission-image" [src]="data.mission_patch" alt="Mission Patch">
+                <div class="mission-details">
+                    <h3>{{ data.mission_name }}</h3>
+                    <p class="launch-date">{{ data.launch_date_local | date: 'medium' }}</p>
+                    <p class="rocket-name">{{ data.rocket_name }}</p>
+                    <p class="site-name">{{ data.site_name_long }}</p>
+                    <p class="nationality">{{ data.nationality }}</p>
+                    <div class="launch-status" [class.success]="data.launch_success"
+                        [class.failure]="!data.launch_success">
+                        {{ data.launch_success ? 'Successful' : 'Failed' }}
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 </body>
