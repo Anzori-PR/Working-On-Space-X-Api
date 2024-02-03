@@ -1,18 +1,5 @@
 <body>
-    <header [style.minWidth.px]="close">
-        <button (click)="sideMenu()"><fa-icon [icon]="faRocket"></fa-icon></button>
-        <nav>
-            <div>
-                <fa-icon [icon]="faCompass"></fa-icon>
-                <span *ngIf="menu">Dashboard</span>
-            </div>
-            <div>
-                <fa-icon [icon]="faBookmark"></fa-icon>
-                <span *ngIf="menu">Bookmarks</span>
-            </div>
-        </nav>
-    </header>
-
+    <app-header></app-header>
     <main>
         <form [formGroup]="searchForm" (ngSubmit)="search()">
             <fa-icon [icon]="faSearch"></fa-icon>
@@ -21,8 +8,7 @@
 
 
         <div class="container">
-            <div *ngFor="let data of Data" class="box">
-                <button> <fa-icon [icon]="faBookmark"></fa-icon> </button>
+            <div *ngFor="let data of Data | paginate: { itemsPerPage: pageNumbers, currentPage: page }" class="box">
                 <img class="mission-image" [src]="data?.links.mission_patch" alt="Mission Patch"
                     (error)="handleImageError($event)">
                 <div class="mission-details">
@@ -33,15 +19,71 @@
                     <p class="site-name"><span>Site Name: </span>{{ data?.launch_site.site_name_long.length > 20 ?
                         data?.launch_site.site_name_long.substr(0, 20) + '...' : data?.launch_site.site_name_long }}</p>
                     <span class="launch-status">
-                        Rocket Launch: 
+                        Rocket Launch:
                         <p [class.success]="data.launch_success" [class.failure]="!data.launch_success"> {{
                             data.launch_success ? 'Successful' : 'Failed' }} </p>
                     </span>
-                    <div class="details">
+                    <div class="details" (click)="openPopUp(data.flight_number)">
                         Details
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="pagination">
+            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+        </div>
+
+
+        <div class="pop_up" *ngIf="popUp">
+            <fa-icon class="close-icon" (click)="closePopUp()" [icon]="faXmark"></fa-icon>
+            <div *ngIf="details" class="popup-content">
+                <div class="popup-header">
+                    <img class="mission-patch" [src]="details.links.mission_patch" alt="Mission Patch">
+                    <h3>{{ details.mission_name }}</h3>
+                </div>
+                <div class="popup-body">
+                    <div class="launch-info">
+                        <p class="launch-date">
+                            <span>Launch Date: </span>{{ details.launch_date_local | date: 'dd/MM/yyyy' }}
+                        </p>
+                        <p class="rocket-name">
+                            <span>Rocket Name: </span>{{ details.rocket.rocket_name }}
+                        </p>
+                        <p class="site-name">
+                            <span>Site Name: </span>{{ details.launch_site.site_name_long }}
+                        </p>
+                        <span class="launch-status">
+                            Rocket Launch:
+                            <p [class.success]="details.launch_success" [class.failure]="!details.launch_success">
+                                {{ details.launch_success ? 'Successful' : 'Failed' }}
+                            </p>
+                        </span>
+                    </div>
+                    <div class="additional-info">
+                        <p class="payload-type">
+                            <span>Payload Type: </span>{{ details.rocket.second_stage.payloads[0].payload_type }}
+                        </p>
+                        <p class="orbit">
+                            <span>Orbit: </span>{{ details.rocket.second_stage.payloads[0].orbit }}
+                        </p>
+                        <p class="payload-mass">
+                            <span>Payload Mass: </span>{{ details.rocket.second_stage.payloads[0].payload_mass_kg }} kg
+                        </p>
+                        <p class="nationality">
+                            <span>Nationality: </span>{{ details.rocket.second_stage.payloads[0].nationality }}
+                        </p>
+                    </div>
+                </div>
+                <div class="popup-footer">
+                    <p class="details">{{ details.details }}</p>
+                    <div class="links">
+                        <a href="{{ details.links.article_link }}" target="_blank">Read More</a>
+                        <a href="{{ details.links.video_link }}" target="_blank">Watch Launch</a>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        
     </main>
 </body>

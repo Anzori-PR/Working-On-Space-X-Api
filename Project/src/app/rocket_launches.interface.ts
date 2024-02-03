@@ -1,4 +1,11 @@
 export interface rocket_launches {
+    second_stage: any;
+    video_link: any;
+    article_link: any;
+    details: any;
+    orbit: any;
+    payload_mass_kg: any;
+    payload_type: string;
     rocket: any;
     launch_site: any;
     launch_success: any;
@@ -10,4 +17,5 @@ export interface rocket_launches {
     site_name_long: string;
     mission_patch: string;
     nationality: string;
+    flight_number: string;
 }

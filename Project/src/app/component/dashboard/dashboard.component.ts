@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { rocket_launches } from 'src/app/rocket_launches.interface';
 import { FetchDataService } from 'src/app/service/fetch-data.service';
-import { faRocket } from '@fortawesome/free-solid-svg-icons';
-import { faCompass } from '@fortawesome/free-solid-svg-icons';
-import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup } from '@angular/forms';
 
 
@@ -13,37 +10,30 @@ import { FormControl, FormGroup } from '@angular/forms';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  animations: [
-    trigger('menuAnimation', [
-      state('closed', style({
-        minWidth: '40px',
-      })),
-      state('open', style({
-        minWidth: '145px',
-        opacity: '1',
-      })),
-      transition('closed <=> open', animate('0.6s ease-in-out')),
-    ]),
-  ],
 })
 export class DashboardComponent implements OnInit{
   Data: rocket_launches[] = [];
-  Search: Array<any> = [];
-  menu: Boolean = true;
-  closing = true;
-  close = 200;
-  faRocket = faRocket;
-  faCompass = faCompass;
-  faBookmark = faBookmark;
-  faSearch = faSearch;
-  searchForm!: FormGroup;
   defaultImage: string = '../../../assets/default.jpg';
+  Search: Array<any> = [];
+
+  details: rocket_launches | undefined;
+  popUp: boolean = false;
+  
+  searchForm!: FormGroup;
+  
+  faSearch = faSearch;
+  faXmark = faXmark;
+
+  page: number = 1;
+  pageNumbers: number = 20;
+  totalItems: any;
 
   constructor(private service : FetchDataService) {}
 
   ngOnInit(): void {
     this.service.getData().subscribe((data) => {
       this.Data = data;
+      this.totalItems = data.length;
     });
   
     this.searchForm = new FormGroup({
@@ -51,22 +41,6 @@ export class DashboardComponent implements OnInit{
     });
   }
   
-  sideMenu() {
-    if (this.closing) {
-      this.close = 0;
-      setTimeout(() => {
-        this.menu = false;
-        this.closing = false;
-      }, 100);
-    } else {
-      this.close = 200;
-      setTimeout(() => {
-        this.menu = true;
-        this.closing = true;
-      }, 350);
-    }
-
-  }
 
   search() {
     const searchTerm = this.searchForm.value.search.toLowerCase();
@@ -85,6 +59,23 @@ export class DashboardComponent implements OnInit{
   handleImageError(event: any) {
     event.target.src = this.defaultImage;
   }
+
+  openPopUp(id: string) {
+    this.details = this.Data.find(e => e.flight_number === id);
+    this.popUp = true;
+  }
+
+  closePopUp() {
+    this.popUp = false;
+  }
   
+
+  onPageChange(pageNumber: number): void {
+    this.page = pageNumber;
+    // Add Time out bc sometimes scroll to top isnot working, now it's fixed;
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 0);
+  }
 
 }
