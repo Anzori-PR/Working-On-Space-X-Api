@@ -76,7 +76,7 @@ body {
         .mission-details {
           display: flex;
           flex-direction: column;
-          justify-content: end;
+          justify-content: flex-end;
         }
 
         .launch-date,
@@ -136,19 +136,27 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 1rem;
       color: white;
       margin-top: 2rem;
 
       ::ng-deep {
 
+        .ngx-pagination {
+          padding-left: 0px;
+        }
+
+        .ngx-pagination .pagination-previous span {
+          display: none;
+        }
+
+        .ngx-pagination .pagination-next span {
+          display: none;
+        }
+
         .ngx-pagination a {
           color: white;
         }
 
-        .ngx-pagination {
-          padding-left: 0px;
-        }
 
         .ngx-pagination .current,
         .btn-info {
@@ -163,7 +171,6 @@ body {
           border: transparent;
           border-radius: 20px;
         }
-
       }
     }
 
@@ -266,5 +273,11 @@ body {
         }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .popup-body {
+    flex-direction: column;
   }
 }

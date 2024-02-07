@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit{
   faXmark = faXmark;
 
   page: number = 1;
-  pageNumbers: number = 20;
+  pageNumbers: number = 25;
   totalItems: any;
 
   constructor(private service : FetchDataService) {}

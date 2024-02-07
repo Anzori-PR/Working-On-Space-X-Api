@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { faRocket } from '@fortawesome/free-solid-svg-icons';
-import { faCompass } from '@fortawesome/free-solid-svg-icons';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
@@ -24,12 +24,12 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class HeaderComponent implements OnInit{
   menu: Boolean = true;
   closing = true;
-  close = 200;
+  close = window.innerWidth >= 800 ? 200 : 0;
   faRocket = faRocket;
-  faCompass = faCompass;
+  faHouse = faHouse;
   faBookmark = faBookmark;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     
@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit{
       this.close = 0;
       setTimeout(() => {
         this.menu = false;
-        this.closing = false;
+        this.closing = window.innerWidth <= 800 ? true : false;
       }, 100);
     } else {
       this.close = 200;
@@ -49,6 +49,13 @@ export class HeaderComponent implements OnInit{
         this.closing = true;
       }, 450);
     }
-
+    
   }
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.close = window.innerWidth <= 800 ? 0 : 200;
+  }
+
 }

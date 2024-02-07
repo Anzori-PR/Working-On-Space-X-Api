@@ -1,13 +1,9 @@
-<header [style.minWidth.px]="close">
+<header [style.minWidth.px]="close" >
     <button (click)="sideMenu()"><fa-icon [icon]="faRocket"></fa-icon></button>
     <nav>
         <div>
-            <fa-icon [icon]="faCompass"></fa-icon>
-            <span *ngIf="menu">Dashboard</span>
-        </div>
-        <div>
-            <fa-icon [icon]="faBookmark"></fa-icon>
-            <span *ngIf="menu">Bookmarks</span>
+            <fa-icon [icon]="faHouse"></fa-icon>
+            <span *ngIf="menu">Home</span>
         </div>
     </nav>
 </header>

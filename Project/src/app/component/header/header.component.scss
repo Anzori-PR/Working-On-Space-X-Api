@@ -9,7 +9,7 @@
 header {
     min-width: 40px;
     height: 100vh;
-    padding: 20px;
+    padding: 0 40px;
     padding-top: 50px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -42,9 +42,12 @@ header {
         align-items: flex-start;
         color: white;
         margin-top: 5rem;
+        background-color: #10141e;
+        position: absolute;
+        padding-left: 1rem;
 
         div {
-            margin: 30px 10px;
+            margin: 20px 10px;
             display: flex;
             gap: 1rem;
             height: 20px;
@@ -56,4 +59,38 @@ header {
             color: #fc4747;
         }
     }
+
+    nav::before {
+        content: '';
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: #161d2f;
+        border-radius: 30px;
+        right: 0;
+        top: -30px;
+        box-shadow: #10141e 10px 10px 0px 0px;
+    }
+
+    nav::after {
+        content: '';
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: #161d2f;
+        border-radius: 30px;
+        right: 0;
+        bottom: -30px;
+        box-shadow: #10141e 12px -12px 0px 0px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+
+    header {
+        span {
+            display: none;
+        }
+    }
+
 }
